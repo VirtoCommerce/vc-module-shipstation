@@ -1,10 +1,8 @@
-﻿using System;
-using Microsoft.Practices.Unity;
+﻿using Microsoft.Practices.Unity;
 using Shipstation.FulfillmentModule.Web.Controllers;
-using VirtoCommerce.Platform.Core.ExportImport;
 using VirtoCommerce.Platform.Core.Modularity;
 
-namespace Shipstation.FulfillmentModule.Web
+namespace ShipStation.FulfillmentModule.Web
 {
     public class Module : ModuleBase
     {
@@ -16,15 +14,13 @@ namespace Shipstation.FulfillmentModule.Web
         }
 
         #region IModule Members
-        
+
         public override void Initialize()
         {
             _container.RegisterType<ShipstationController>();
         }
-        
-        #endregion
 
-     
+        #endregion
 
     }
 }

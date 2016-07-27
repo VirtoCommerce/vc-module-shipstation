@@ -20,9 +20,9 @@ namespace Shipstation.FulfillmentModule.Web.Converters
                     OrderStatus = order.Status,
                     OrderDate = String.Format("{0:MM'/'dd'/'yyyy HH:mm}", order.CreatedDate),
                     LastModified = String.Format("{0:MM'/'dd'/'yyyy HH:mm}", order.ModifiedDate),
-                    OrderTotal = (float) order.Sum,
-                    ShippingAmount = (float) order.Shipments.Sum(sh => sh.Sum),
-                    TaxAmount = (float) order.Tax,
+                    OrderTotal = (float)order.Sum,
+                    ShippingAmount = (float)order.Shipments.Sum(sh => sh.Sum),
+                    TaxAmount = (float)order.Tax,
                     ShippingMethod = order.Shipments.First().ShipmentMethodCode,
                     ShippingAmountSpecified = true,
                     PaymentMethod = order.InPayments.First().GatewayCode
@@ -35,14 +35,14 @@ namespace Shipstation.FulfillmentModule.Web.Converters
                         var item = new OrdersOrderItem
                         {
                             SKU = shi.LineItem.ProductId,
-							ImageUrl = shi.LineItem.ImageUrl,
-							LineItemID = shi.LineItemId,
-							Name = shi.LineItem.Name,
+                            ImageUrl = shi.LineItem.ImageUrl,
+                            LineItemID = shi.LineItemId,
+                            Name = shi.LineItem.Name,
                             Quantity = (sbyte)shi.Quantity,
-							UnitPrice = (float)order.Items.Single(i => i.ProductId == shi.LineItem.ProductId).Price,
-							Weight = (float)(order.Items.Single(i => i.ProductId == shi.LineItem.ProductId).Weight ?? 0),
-							WeightSpecified = order.Items.Single(i => i.ProductId == shi.LineItem.ProductId).Weight != null,
-							WeightUnits = order.Items.Single(i => i.ProductId == shi.LineItem.ProductId).WeightUnit,
+                            UnitPrice = (float)order.Items.Single(i => i.ProductId == shi.LineItem.ProductId).Price,
+                            Weight = (float)(order.Items.Single(i => i.ProductId == shi.LineItem.ProductId).Weight ?? 0),
+                            WeightSpecified = order.Items.Single(i => i.ProductId == shi.LineItem.ProductId).Weight != null,
+                            WeightUnits = order.Items.Single(i => i.ProductId == shi.LineItem.ProductId).WeightUnit,
 
                         };
 
@@ -61,17 +61,19 @@ namespace Shipstation.FulfillmentModule.Web.Converters
                     order.Addresses.FirstOrDefault(
                         a => a.AddressType == AddressType.Billing || a.AddressType == AddressType.BillingAndShipping);
 
-                if (billAddress != null)
+                if (billAddress == null)
                 {
-                    var billTo = new OrdersOrderCustomerBillTo
+                    billAddress = order.Addresses.FirstOrDefault();
+                }
+
+                if (billAddress != null)
+                    customer.BillTo = new OrdersOrderCustomerBillTo
                     {
                         Company = billAddress.Organization,
                         Name = billAddress.FirstName + " " + billAddress.LastName,
                         Phone = billAddress.Phone
                     };
 
-                    customer.BillTo = billTo;
-                }
 
                 var shipAddress =
                     order.Addresses.FirstOrDefault(
@@ -88,7 +90,7 @@ namespace Shipstation.FulfillmentModule.Web.Converters
                         Address1 = shipAddress.Line1,
                         City = shipAddress.City,
                         PostalCode = shipAddress.PostalCode,
-                        Country = shipAddress.CountryCode,
+                        Country = shipAddress.CountryCode.To2LetterCountryCode(),
                         State = shipAddress.RegionId ?? shipAddress.RegionName
                     };
 

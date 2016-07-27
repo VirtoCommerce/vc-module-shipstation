@@ -1,20 +1,19 @@
-﻿using System;
+﻿using Shipstation.FulfillmentModule.Web.Converters;
+using Shipstation.FulfillmentModule.Web.Models.Notice;
+using Shipstation.FulfillmentModule.Web.Models.Order;
+using Shipstation.FulfillmentModule.Web.Services;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
-using Shipstation.FulfillmentModule.Web.Converters;
-using Shipstation.FulfillmentModule.Web.Models.Notice;
-using Shipstation.FulfillmentModule.Web.Models.Order;
-using Shipstation.FulfillmentModule.Web.Services;
 using VirtoCommerce.Domain.Order.Model;
 using VirtoCommerce.Domain.Order.Services;
-using VirtoCommerce.Platform.Data.Security.Authentication.Basic;
 
 namespace Shipstation.FulfillmentModule.Web.Controllers
 {
-	[ApiExplorerSettings(IgnoreApi = true)]
+    [ApiExplorerSettings(IgnoreApi = true)]
     [RoutePrefix("api/fulfillment/shipstation")]
     [ControllerConfig]
     public class ShipstationController : ApiController
