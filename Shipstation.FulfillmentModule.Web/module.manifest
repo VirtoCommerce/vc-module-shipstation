@@ -10,12 +10,13 @@
     <title>ShipStation fulfillment</title>
     <description>ShipStation fulfillment module enables synchronizing customer orders with ShipStation. That way new orders with shipments placed in VirtoCommerce will become available in ShipStation admin and changes of shipment status will be synced with VirtoCommerce orders.</description>
     <authors>
-        <author>Virto Commerce</author>
+        <author>Egidijus Mažeika</author>
+        <author>Andrej Artiomov</author>
     </authors>
     <owners>
         <owner>Virto Commerce</owner>
     </owners>
-    <projectUrl>http://virtocommerce.com/</projectUrl>
+    <projectUrl>https://github.com/VirtoCommerce/vc-module-Shipstation</projectUrl>
     <iconUrl>https://github.com/VirtoCommerce/vc-module-Shipstation/raw/master/Shipstation.FulfillmentModule.Web/Content/logo.png</iconUrl>
     <releaseNotes>First version.</releaseNotes>
     <copyright>Copyright © 2011-2016 Virto Commerce. All rights reserved</copyright>
