@@ -6,9 +6,14 @@ Installing the module:
 * Automatically: in VC Manager go to Configuration -> Modules -> ShipStation fulfillment -> Install
 * Manually: download module zip package from https://github.com/VirtoCommerce/vc-module-Shipstation/releases. In VC Manager go to Configuration -> Modules -> Advanced -> upload module package -> Install.
 
-# Module management and settings UI
+Connecting to ShipStation:
 
+Follow the steps provided in <a href="https://help.shipstation.com/hc/en-us/articles/205928478#3" target="_blank">Connect to ShipStation</a> section of ShipStation's Custom Store Development Guide.
 
+Be sure that "URL to custom XML page" parameter points to your public Commerce Manager site and ends with "/api/fulfillment/shipstation":
+![image](https://cloud.githubusercontent.com/assets/5801549/17191416/87e432c8-5452-11e6-981a-0cde04183dec.png)
+
+Check "Bringing Orders into ShipStation" and "Send Shipping Notifications from ShipStation" sections on the same guide onwards.
 
 # Settings
 This module has no settings defined as all integration actions are initiated from ShipStation system.
