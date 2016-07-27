@@ -13,6 +13,8 @@ Follow the steps provided in <a href="https://help.shipstation.com/hc/en-us/arti
 Be sure that "URL to custom XML page" parameter points to your public Commerce Manager site and ends with "/api/fulfillment/shipstation":
 ![image](https://cloud.githubusercontent.com/assets/5801549/17191416/87e432c8-5452-11e6-981a-0cde04183dec.png)
 
+Ensure to type corresponding order statuses from VirtoCommerce like "New", "Processing", etc.
+
 Check "Bringing Orders into ShipStation" and "Send Shipping Notifications from ShipStation" sections on the same guide onwards.
 
 # Settings
