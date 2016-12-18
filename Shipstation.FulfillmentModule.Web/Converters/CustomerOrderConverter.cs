@@ -22,7 +22,7 @@ namespace Shipstation.FulfillmentModule.Web.Converters
                     LastModified = String.Format("{0:MM'/'dd'/'yyyy HH:mm}", order.ModifiedDate),
                     OrderTotal = (float)order.Sum,
                     ShippingAmount = (float)order.Shipments.Sum(sh => sh.Sum),
-                    TaxAmount = (float)order.Tax,
+                    TaxAmount = (float)order.TaxTotal,
                     ShippingMethod = order.Shipments.First().ShipmentMethodCode,
                     ShippingAmountSpecified = true,
                     PaymentMethod = order.InPayments.First().GatewayCode
