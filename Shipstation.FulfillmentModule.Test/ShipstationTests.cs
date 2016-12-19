@@ -28,8 +28,11 @@ namespace Shipstation.FulfillmentModule.Test {
             _orderService = new Mock<ICustomerOrderService>();
             _orderSearchService = new Mock<ICustomerOrderSearchService>();
 
-            _orderService.Setup(s => s.GetByIds(new[] { It.IsAny<string>() }, "Full"))
-                    .Returns(() => _order);
+            //_orderService.Setup(s => s.GetByIds(new[] { It.IsAny<string>() }, "Full"))
+            //        .Returns(() => _order);
+
+            _orderSearchService.Setup(s => s.SearchCustomerOrders(new CustomerOrderSearchCriteria { ResponseGroup = "Full", Number = It.IsAny<string>() }).Results)
+                .Returns(() => _order);
 
             _controller = GetShipstationController();
         }
