@@ -26,6 +26,7 @@ namespace Shipstation.FulfillmentModule.Test {
         public ShipstationTests() {
             _order = GetTestOrder("123");
             _orderService = new Mock<ICustomerOrderService>();
+            _orderSearchService = new Mock<ICustomerOrderSearchService>();
             _orderService.Setup(s => s.GetByIds(new[] { It.IsAny<string>() }, "Full").FirstOrDefault())
                     .Returns(() => _order);
 
@@ -332,11 +333,10 @@ namespace Shipstation.FulfillmentModule.Test {
             //settingsManager.Setup(manager => manager.GetValue(_passwordPropertyName, string.Empty)).Returns(() => settings.First(x => x.Name == _passwordPropertyName).Value);
             //settingsManager.Setup(manager => manager.GetValue(_serviceUrlPropertyName, string.Empty)).Returns(() => settings.First(x => x.Name == _serviceUrlPropertyName).Value);
 
-            var orderSearchService = new Mock<ICustomerOrderSearchService>();
-            orderSearchService.Setup(service => service.SearchCustomerOrders(It.IsAny<CustomerOrderSearchCriteria>()))
+            _orderSearchService.Setup(service => service.SearchCustomerOrders(It.IsAny<CustomerOrderSearchCriteria>()))
                 .Returns(() => new GenericSearchResult<CustomerOrder> { Results = new List<CustomerOrder> { _order } });
 
-            var controller = new ShipstationController(_orderService.Object, orderSearchService.Object);
+            var controller = new ShipstationController(_orderService.Object, _orderSearchService.Object);
             return controller;
         }
     }
