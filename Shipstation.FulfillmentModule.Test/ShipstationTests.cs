@@ -10,33 +10,30 @@ using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Web.Http.Results;
 using VirtoCommerce.Domain.Commerce.Model;
+using VirtoCommerce.Domain.Commerce.Model.Search;
 using VirtoCommerce.Domain.Order.Model;
 using VirtoCommerce.Domain.Order.Services;
 using Xunit;
 
-namespace Shipstation.FulfillmentModule.Test
-{
+namespace Shipstation.FulfillmentModule.Test {
     [Trait("Category", "CI")]
-    public class ShipstationTests
-    {
+    public class ShipstationTests {
         private readonly ShipstationController _controller;
         private static CustomerOrder _order;
         private static Mock<ICustomerOrderService> _orderService;
+        private static Mock<ICustomerOrderSearchService> _orderSearchService;
 
-        public ShipstationTests()
-        {
+        public ShipstationTests() {
             _order = GetTestOrder("123");
             _orderService = new Mock<ICustomerOrderService>();
-            _orderService.Setup(s => s.GetByOrderNumber(It.IsAny<string>(), CustomerOrderResponseGroup.Full))
+            _orderService.Setup(s => s.GetByIds(new[] { It.IsAny<string>() }, "Full").FirstOrDefault())
                     .Returns(() => _order);
 
             _controller = GetShipstationController();
         }
 
-        private static CustomerOrder GetTestOrder(string id)
-        {
-            var order = new CustomerOrder
-            {
+        private static CustomerOrder GetTestOrder(string id) {
+            var order = new CustomerOrder {
                 Id = id,
                 Currency = "USD",
                 CustomerId = "Test Customer",
@@ -61,20 +58,19 @@ namespace Shipstation.FulfillmentModule.Test
                     Organization = "org1"
                     }
                 }.ToList(),
-                Discount = new Discount
-                {
-                    PromotionId = "testPromotion",
-                    Currency = "USD",
-                    DiscountAmount = 12,
-                    Coupon = new Coupon
+                Discounts = new List<Discount> { new Discount
                     {
-                        Code = "ssss"
+                        PromotionId = "testPromotion",
+                        Currency = "USD",
+                        DiscountAmount = 12,
+                        Coupon = new Coupon
+                        {
+                            Code = "ssss"
+                        }
                     }
                 }
             };
-            var item1 = new LineItem
-            {
-                BasePrice = 10,
+            var item1 = new LineItem {
                 Price = 20,
                 ProductId = "shoes",
                 CatalogId = "catalog",
@@ -83,20 +79,19 @@ namespace Shipstation.FulfillmentModule.Test
                 Name = "shoes",
                 Quantity = 2,
                 ShippingMethodCode = "EMS",
-                Discount = new Discount
-                {
-                    PromotionId = "itemPromotion",
-                    Currency = "USD",
-                    DiscountAmount = 12,
-                    Coupon = new Coupon
+                Discounts = new List<Discount> { new Discount
                     {
-                        Code = "ssss"
+                        PromotionId = "itemPromotion",
+                        Currency = "USD",
+                        DiscountAmount = 12,
+                        Coupon = new Coupon
+                        {
+                            Code = "ssss"
+                        }
                     }
                 }
             };
-            var item2 = new LineItem
-            {
-                BasePrice = 100,
+            var item2 = new LineItem {
                 Price = 100,
                 ProductId = "t-shirt",
                 CatalogId = "catalog",
@@ -105,14 +100,14 @@ namespace Shipstation.FulfillmentModule.Test
                 Name = "t-shirt",
                 Quantity = 2,
                 ShippingMethodCode = "EMS",
-                Discount = new Discount
-                {
-                    PromotionId = "testPromotion",
-                    Currency = "USD",
-                    DiscountAmount = 12,
-                    Coupon = new Coupon
+                Discounts = new List<Discount> { new Discount
                     {
-                        Code = "ssss"
+                        PromotionId = "testPromotion",
+                        Currency = "USD",
+                        DiscountAmount = 12,
+                        Coupon = new Coupon {
+                            Code = "ssss"
+                        }
                     }
                 }
             };
@@ -120,11 +115,9 @@ namespace Shipstation.FulfillmentModule.Test
             order.Items.Add(item1);
             order.Items.Add(item2);
 
-            var shipment = new Shipment
-            {
+            var shipment = new Shipment {
                 Currency = "USD",
-                DeliveryAddress = new Address
-                {
+                DeliveryAddress = new Address {
                     City = "london",
                     CountryName = "England",
                     Phone = "+68787687",
@@ -136,22 +129,20 @@ namespace Shipstation.FulfillmentModule.Test
                     Line1 = "line 1",
                     Organization = "org1"
                 },
-                Discount = new Discount
-                {
-                    PromotionId = "testPromotion",
-                    Currency = "USD",
-                    DiscountAmount = 12,
-                    Coupon = new Coupon
-                    {
-                        Code = "ssss"
+                Discounts = new List<Discount> { new Discount {
+                        PromotionId = "testPromotion",
+                        Currency = "USD",
+                        DiscountAmount = 12,
+                        Coupon = new Coupon {
+                            Code = "ssss"
+                        }
                     }
                 }
             };
             order.Shipments = new List<Shipment>();
             order.Shipments.Add(shipment);
 
-            var payment = new PaymentIn
-            {
+            var payment = new PaymentIn {
                 GatewayCode = "PayPal",
                 Currency = "USD",
                 Sum = 10,
@@ -163,8 +154,7 @@ namespace Shipstation.FulfillmentModule.Test
         }
 
 
-        string Serialize<T>(MediaTypeFormatter formatter, T value)
-        {
+        string Serialize<T>(MediaTypeFormatter formatter, T value) {
             // Create a dummy HTTP Content.
             Stream stream = new MemoryStream();
             var content = new StreamContent(stream);
@@ -175,8 +165,7 @@ namespace Shipstation.FulfillmentModule.Test
             return content.ReadAsStringAsync().Result;
         }
 
-        T Deserialize<T>(MediaTypeFormatter formatter, string str) where T : class
-        {
+        T Deserialize<T>(MediaTypeFormatter formatter, string str) where T : class {
             // Write the serialized string to a memory stream.
             var stream = new MemoryStream();
             var writer = new StreamWriter(stream);
@@ -188,8 +177,7 @@ namespace Shipstation.FulfillmentModule.Test
         }
 
         [Fact]
-        public void TestApiExport()
-        {
+        public void TestApiExport() {
             const string dateFormat = "{0:MM'/'dd'/'yyyy  HH:mm:ss}";
 
             var retVal = _controller.GetNewOrders("export",
@@ -201,11 +189,9 @@ namespace Shipstation.FulfillmentModule.Test
         }
 
         [Fact]
-        public void api_updateOrders_success()
-        {
+        public void api_updateOrders_success() {
             // Arrange 
-            var shipNotice = new ShipNotice
-            {
+            var shipNotice = new ShipNotice {
                 OrderNumber = "123",
                 TrackingNumber = "000",
                 Items = new ShipNoticeItemsItem[]
@@ -220,26 +206,24 @@ namespace Shipstation.FulfillmentModule.Test
 
             // Assert
             Assert.IsType<OkNegotiatedContentResult<ShipNotice>>(retVal);
-            var order = _orderService.Object.GetByOrderNumber("123", CustomerOrderResponseGroup.Full);
-            Assert.Equal("Completed", order.Status);
-            Assert.Equal("Sent", order.Shipments.First().Status);
-            Assert.Equal("000", order.Shipments.First().Number);
+            var searchCriteria = new CustomerOrderSearchCriteria { ResponseGroup = "Full", Number = "123" };
+            var order = _orderSearchService.Object.SearchCustomerOrders(searchCriteria);
+            Assert.Equal("Completed", order.Results.FirstOrDefault().Status);
+            Assert.Equal("Sent", order.Results.FirstOrDefault().Shipments.First().Status);
+            Assert.Equal("000", order.Results.FirstOrDefault().Shipments.First().Number);
         }
 
         //[Fact]
-        public void TestSerialization()
-        {
+        public void TestSerialization() {
             const string dateFormat = "{0:MM'/'dd'/'yyyy  HH:mm:ss tt}";
 
-            var billAddress = new OrdersOrderCustomerBillTo
-            {
+            var billAddress = new OrdersOrderCustomerBillTo {
                 Company = "Home",
                 Email = "test@email.com",
                 Name = "Test Person"
             };
 
-            var shipAddress = new OrdersOrderCustomerShipTo
-            {
+            var shipAddress = new OrdersOrderCustomerShipTo {
                 Address1 = "45 Fremont street, 2",
                 City = "Los Angeles",
                 Company = "Home",
@@ -249,15 +233,13 @@ namespace Shipstation.FulfillmentModule.Test
                 State = "California"
             };
 
-            var customer = new OrdersOrderCustomer
-            {
+            var customer = new OrdersOrderCustomer {
                 CustomerCode = "testCustomer",
                 BillTo = billAddress,
                 ShipTo = shipAddress
             };
 
-            var order = new OrdersOrder
-            {
+            var order = new OrdersOrder {
                 OrderID = "1234567890",
                 OrderNumber = "CU123456789",
                 OrderDate = string.Format(dateFormat, DateTime.UtcNow),
@@ -271,8 +253,7 @@ namespace Shipstation.FulfillmentModule.Test
             };
 
 
-            var value = new Orders
-            {
+            var value = new Orders {
                 Order = new[] { order },
                 pages = 5,
                 pagesSpecified = true
@@ -321,8 +302,7 @@ namespace Shipstation.FulfillmentModule.Test
         //    }
         //}
 
-        private static ShipstationController GetShipstationController()
-        {
+        private static ShipstationController GetShipstationController() {
             //var settings = new List<SettingEntry>
             //{
             //    new SettingEntry
@@ -353,8 +333,8 @@ namespace Shipstation.FulfillmentModule.Test
             //settingsManager.Setup(manager => manager.GetValue(_serviceUrlPropertyName, string.Empty)).Returns(() => settings.First(x => x.Name == _serviceUrlPropertyName).Value);
 
             var orderSearchService = new Mock<ICustomerOrderSearchService>();
-            orderSearchService.Setup(service => service.Search(It.IsAny<SearchCriteria>()))
-                .Returns(() => new SearchResult { CustomerOrders = new List<CustomerOrder> { _order } });
+            orderSearchService.Setup(service => service.SearchCustomerOrders(It.IsAny<CustomerOrderSearchCriteria>()))
+                .Returns(() => new GenericSearchResult<CustomerOrder> { Results = new List<CustomerOrder> { _order } });
 
             var controller = new ShipstationController(_orderService.Object, orderSearchService.Object);
             return controller;

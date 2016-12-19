@@ -36,8 +36,8 @@ namespace Shipstation.FulfillmentModule.Web.Controllers
             if (action == "export")
             {
                 var shipstationOrders = new Orders();
-
                 var searchCriteria = new CustomerOrderSearchCriteria{};
+                searchCriteria.ResponseGroup = "Full";
 
                 if (start_date != null)
                     searchCriteria.StartDate = DateTime.Parse(start_date, new CultureInfo("en-US"));
@@ -53,16 +53,21 @@ namespace Shipstation.FulfillmentModule.Web.Controllers
 
                 var searchResult = _orderSearchService.SearchCustomerOrders(searchCriteria);
 
-                if (searchResult.Results != null && searchResult.Results.Any())
+                if (searchResult == null) {
+                    return BadRequest("Order not found");
+                }
+
+                if (searchResult.TotalCount > 0)
                 {
                     var shipstationOrdersList = new List<OrdersOrder>();
-                    foreach (var order in searchResult.Results) {
-                        shipstationOrdersList.Add(order.ToShipstationOrder());
-                    };
+
+                    var CustomerOrders = searchResult.Results.ToList();
+
+                    CustomerOrders.ForEach(cu => shipstationOrdersList.Add(cu.ToShipstationOrder()));
                     shipstationOrders.Order = shipstationOrdersList.ToArray();
 
                     //if first page was requested and total orders more than returned add to response overall pages count that shipstation should request.
-                    if ((page == 1) && searchResult.Results.Count() > searchCriteria.Skip)
+                    if ((page == 1) && searchResult.TotalCount > searchCriteria.Take)
                     {
                         shipstationOrders.pages = (short)(searchResult.Results.Count() / searchCriteria.Skip);
                         shipstationOrders.pages += (short)(searchResult.Results.Count() % searchCriteria.Skip == 0 ? 0 : 1);
@@ -82,8 +87,10 @@ namespace Shipstation.FulfillmentModule.Web.Controllers
         public IHttpActionResult UpdateOrders(string action, string order_number, string carrier, string service, string tracking_number, ShipNotice shipnotice)
         {
             var searchCriteria = new CustomerOrderSearchCriteria {
-                Number = shipnotice.OrderNumber
+                Number = shipnotice.OrderNumber,
+                ResponseGroup = "Full"
             };
+
             var order = _orderSearchService.SearchCustomerOrders(searchCriteria);
 
             if (order == null)
@@ -93,9 +100,12 @@ namespace Shipstation.FulfillmentModule.Web.Controllers
 
             var updatedOrder = _orderService.GetByIds(new[] { order.Results.FirstOrDefault().Id }).FirstOrDefault();
 
-            updatedOrder.Patch(shipnotice);
+            if(updatedOrder != null) {
+                updatedOrder.Patch(shipnotice);
 
-            _orderService.SaveChanges(new[] { updatedOrder });
+                _orderService.SaveChanges(new[] { updatedOrder });
+            }
+
             return Ok(shipnotice);
         }
     }

@@ -28,12 +28,9 @@ namespace Shipstation.FulfillmentModule.Web.Converters
                     PaymentMethod = order.InPayments.First().GatewayCode
                 };
                 var items = new List<OrdersOrderItem>();
-                order.Shipments.Where(s => s.Items != null && s.Items.Any()).ForEach(sh =>
-                {
-                    sh.Items.ForEach(shi =>
-                    {
-                        var item = new OrdersOrderItem
-                        {
+                order.Shipments.Where(s => s.Items != null && s.Items.Any()).ForEach(sh => {
+                    sh.Items.ForEach(shi => {
+                        var item = new OrdersOrderItem {
                             SKU = shi.LineItem.ProductId,
                             ImageUrl = shi.LineItem.ImageUrl,
                             LineItemID = shi.LineItemId,
@@ -57,44 +54,42 @@ namespace Shipstation.FulfillmentModule.Web.Converters
                     CustomerCode = order.CustomerId
                 };
 
-                var billAddress =
-                    order.Addresses.FirstOrDefault(
-                        a => a.AddressType == AddressType.Billing || a.AddressType == AddressType.BillingAndShipping);
+                if (order.Addresses.Any()) {
 
-                if (billAddress == null)
-                {
-                    billAddress = order.Addresses.FirstOrDefault();
-                }
+                    var billAddress =
+                        order.Addresses.FirstOrDefault(
+                            a => a.AddressType == AddressType.Billing || a.AddressType == AddressType.BillingAndShipping);
 
-                if (billAddress != null)
-                    customer.BillTo = new OrdersOrderCustomerBillTo
-                    {
-                        Company = billAddress.Organization,
-                        Name = billAddress.FirstName + " " + billAddress.LastName,
-                        Phone = billAddress.Phone
-                    };
+                    if (billAddress == null) {
+                        billAddress = order.Addresses.FirstOrDefault();
+                    }
 
+                    if (billAddress != null)
+                        customer.BillTo = new OrdersOrderCustomerBillTo {
+                            Company = billAddress.Organization,
+                            Name = billAddress.FirstName + " " + billAddress.LastName,
+                            Phone = billAddress.Phone
+                        };
 
-                var shipAddress =
-                    order.Addresses.FirstOrDefault(
-                        a => a.AddressType == AddressType.Shipping || a.AddressType == AddressType.BillingAndShipping);
+                    var shipAddress =
+                        order.Addresses.FirstOrDefault(
+                            a => a.AddressType == AddressType.Shipping || a.AddressType == AddressType.BillingAndShipping);
 
-                if (shipAddress != null)
-                {
+                    if (shipAddress != null) {
 
-                    var shipTo = new OrdersOrderCustomerShipTo
-                    {
-                        Company = shipAddress.Organization,
-                        Name = shipAddress.FirstName + " " + shipAddress.LastName,
-                        Phone = shipAddress.Phone,
-                        Address1 = shipAddress.Line1,
-                        City = shipAddress.City,
-                        PostalCode = shipAddress.PostalCode,
-                        Country = shipAddress.CountryCode.To2LetterCountryCode(),
-                        State = shipAddress.RegionId ?? shipAddress.RegionName
-                    };
+                        var shipTo = new OrdersOrderCustomerShipTo {
+                            Company = shipAddress.Organization,
+                            Name = shipAddress.FirstName + " " + shipAddress.LastName,
+                            Phone = shipAddress.Phone,
+                            Address1 = shipAddress.Line1,
+                            City = shipAddress.City,
+                            PostalCode = shipAddress.PostalCode,
+                            Country = shipAddress.CountryCode.To2LetterCountryCode(),
+                            State = shipAddress.RegionId ?? shipAddress.RegionName
+                        };
 
-                    customer.ShipTo = shipTo;
+                        customer.ShipTo = shipTo;
+                    }
                 }
 
                 retVal.Customer = customer;
