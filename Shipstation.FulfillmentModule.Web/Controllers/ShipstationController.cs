@@ -36,11 +36,8 @@ namespace Shipstation.FulfillmentModule.Web.Controllers
             if (action == "export")
             {
                 var shipstationOrders = new Orders();
-
-                var searchCriteria = new SearchCriteria
-                {
-                    ResponseGroup = ResponseGroup.Full
-                };
+                var searchCriteria = new CustomerOrderSearchCriteria{};
+                searchCriteria.ResponseGroup = "Full";
 
                 if (start_date != null)
                     searchCriteria.StartDate = DateTime.Parse(start_date, new CultureInfo("en-US"));
@@ -51,22 +48,29 @@ namespace Shipstation.FulfillmentModule.Web.Controllers
                 //if page more than 1 shipstation requests second or later page to be returned. move start position to that page.
                 if (page > 1)
                 {
-                    searchCriteria.Start += searchCriteria.Count * (page - 1);
+                    searchCriteria.Skip += searchCriteria.Take * (page - 1);
                 }
 
-                var searchResult = _orderSearchService.Search(searchCriteria);
+                var searchResult = _orderSearchService.SearchCustomerOrders(searchCriteria);
 
-                if (searchResult.CustomerOrders != null && searchResult.CustomerOrders.Any())
+                if (searchResult == null) {
+                    return BadRequest("Order not found");
+                }
+
+                if (searchResult.TotalCount > 0)
                 {
                     var shipstationOrdersList = new List<OrdersOrder>();
-                    searchResult.CustomerOrders.ForEach(cu => shipstationOrdersList.Add(cu.ToShipstationOrder()));
+
+                    var CustomerOrders = searchResult.Results.ToList();
+
+                    CustomerOrders.ForEach(cu => shipstationOrdersList.Add(cu.ToShipstationOrder()));
                     shipstationOrders.Order = shipstationOrdersList.ToArray();
 
                     //if first page was requested and total orders more than returned add to response overall pages count that shipstation should request.
-                    if ((page == 1) && searchResult.TotalCount > searchCriteria.Count)
+                    if ((page == 1) && searchResult.TotalCount > searchCriteria.Take)
                     {
-                        shipstationOrders.pages = (short)(searchResult.TotalCount / searchCriteria.Count);
-                        shipstationOrders.pages += (short)(searchResult.TotalCount % searchCriteria.Count == 0 ? 0 : 1);
+                        shipstationOrders.pages = (short)(searchResult.Results.Count() / searchCriteria.Skip);
+                        shipstationOrders.pages += (short)(searchResult.Results.Count() % searchCriteria.Skip == 0 ? 0 : 1);
                         shipstationOrders.pagesSpecified = true;
                     }
                 }
@@ -82,14 +86,26 @@ namespace Shipstation.FulfillmentModule.Web.Controllers
         [IdentityBasicAuthentication]
         public IHttpActionResult UpdateOrders(string action, string order_number, string carrier, string service, string tracking_number, ShipNotice shipnotice)
         {
-            var order = _orderService.GetByOrderNumber(shipnotice.OrderNumber, CustomerOrderResponseGroup.Full);
+            var searchCriteria = new CustomerOrderSearchCriteria {
+                Number = shipnotice.OrderNumber,
+                ResponseGroup = "Full"
+            };
+
+            var order = _orderSearchService.SearchCustomerOrders(searchCriteria);
+
             if (order == null)
             {
                 return BadRequest("Order not found");
             }
 
-            order.Patch(shipnotice);
-            _orderService.Update(new[] { order });
+            var updatedOrder = _orderService.GetByIds(new[] { order.Results.FirstOrDefault().Id }).FirstOrDefault();
+
+            if(updatedOrder != null) {
+                updatedOrder.Patch(shipnotice);
+
+                _orderService.SaveChanges(new[] { updatedOrder });
+            }
+
             return Ok(shipnotice);
         }
     }
