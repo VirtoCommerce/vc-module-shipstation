@@ -19,20 +19,21 @@ namespace Shipstation.FulfillmentModule.Test {
     [Trait("Category", "CI")]
     public class ShipstationTests {
         private readonly ShipstationController _controller;
-        private static List<CustomerOrder> _order;
+        private static CustomerOrder _order;
         private static Mock<ICustomerOrderService> _orderService;
         private static Mock<ICustomerOrderSearchService> _orderSearchService;
 
         public ShipstationTests() {
             _order = GetTestOrder("123");
+            _orderService = new Mock<ICustomerOrderService>();
             _orderSearchService = new Mock<ICustomerOrderSearchService>();
-            _orderSearchService.Setup(s => s.SearchCustomerOrders(new CustomerOrderSearchCriteria{ ResponseGroup = "Full", Number = It.IsAny<string>() }).Results)
+            _orderService.Setup(s => s.GetByIds(new[] { It.IsAny<string>() }, "Full").FirstOrDefault())
                     .Returns(() => _order);
 
             _controller = GetShipstationController();
         }
 
-        private static List<CustomerOrder> GetTestOrder(string id) {
+        private static CustomerOrder GetTestOrder(string id) {
             var order = new CustomerOrder {
                 Id = id,
                 Currency = "USD",
@@ -150,10 +151,7 @@ namespace Shipstation.FulfillmentModule.Test {
             };
             order.InPayments = new List<PaymentIn> { payment };
 
-            var orderList = new List<CustomerOrder> { };
-            orderList.Add(order);
-
-            return orderList;
+            return order;
         }
 
 
@@ -336,7 +334,7 @@ namespace Shipstation.FulfillmentModule.Test {
             //settingsManager.Setup(manager => manager.GetValue(_serviceUrlPropertyName, string.Empty)).Returns(() => settings.First(x => x.Name == _serviceUrlPropertyName).Value);
 
             _orderSearchService.Setup(service => service.SearchCustomerOrders(It.IsAny<CustomerOrderSearchCriteria>()))
-                .Returns(() => new GenericSearchResult<CustomerOrder> { Results = _order });
+                .Returns(() => new GenericSearchResult<CustomerOrder> { Results = new List<CustomerOrder> { _order } });
 
             var controller = new ShipstationController(_orderService.Object, _orderSearchService.Object);
             return controller;
