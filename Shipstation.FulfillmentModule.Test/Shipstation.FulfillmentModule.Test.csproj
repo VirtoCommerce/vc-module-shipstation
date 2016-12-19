@@ -111,6 +111,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShipstationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
