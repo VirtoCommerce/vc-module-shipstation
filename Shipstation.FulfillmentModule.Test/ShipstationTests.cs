@@ -19,7 +19,7 @@ namespace Shipstation.FulfillmentModule.Test {
     [Trait("Category", "CI")]
     public class ShipstationTests {
         private readonly ShipstationController _controller;
-        private static CustomerOrder _order;
+        private static CustomerOrder[] _order;
         private static Mock<ICustomerOrderService> _orderService;
         private static Mock<ICustomerOrderSearchService> _orderSearchService;
 
@@ -27,13 +27,14 @@ namespace Shipstation.FulfillmentModule.Test {
             _order = GetTestOrder("123");
             _orderService = new Mock<ICustomerOrderService>();
             _orderSearchService = new Mock<ICustomerOrderSearchService>();
-            _orderService.Setup(s => s.GetByIds(new[] { It.IsAny<string>() }, It.IsAny<string>()).FirstOrDefault())
+
+            _orderService.Setup(s => s.GetByIds(new[] { It.IsAny<string>() }, "Full"))
                     .Returns(() => _order);
 
             _controller = GetShipstationController();
         }
 
-        private static CustomerOrder GetTestOrder(string id) {
+        private static CustomerOrder[] GetTestOrder(string id) {
             var order = new CustomerOrder {
                 Id = id,
                 Currency = "USD",
@@ -151,7 +152,7 @@ namespace Shipstation.FulfillmentModule.Test {
             };
             order.InPayments = new List<PaymentIn> { payment };
 
-            return order;
+            return new CustomerOrder[] { order };
         }
 
 
@@ -334,7 +335,7 @@ namespace Shipstation.FulfillmentModule.Test {
             //settingsManager.Setup(manager => manager.GetValue(_serviceUrlPropertyName, string.Empty)).Returns(() => settings.First(x => x.Name == _serviceUrlPropertyName).Value);
 
             _orderSearchService.Setup(service => service.SearchCustomerOrders(It.IsAny<CustomerOrderSearchCriteria>()))
-                .Returns(() => new GenericSearchResult<CustomerOrder> { Results = new List<CustomerOrder> { _order } });
+                .Returns(() => new GenericSearchResult<CustomerOrder> { Results = _order });
 
             var controller = new ShipstationController(_orderService.Object, _orderSearchService.Object);
             return controller;
