@@ -27,7 +27,7 @@ namespace Shipstation.FulfillmentModule.Test {
             _order = GetTestOrder("123");
             _orderService = new Mock<ICustomerOrderService>();
             _orderSearchService = new Mock<ICustomerOrderSearchService>();
-            _orderService.Setup(s => s.GetByIds(new[] { It.IsAny<string>() }, "Full").FirstOrDefault())
+            _orderService.Setup(s => s.GetByIds(new[] { It.IsAny<string>() }, It.IsAny<string>()).FirstOrDefault())
                     .Returns(() => _order);
 
             _controller = GetShipstationController();
