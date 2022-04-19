@@ -1,0 +1,28 @@
+{
+    "ShipStation": {
+        "blades": {
+            "hello-world": {
+                "title": "Hello world blade"
+            }
+        }
+    },
+    "permissions": {
+        "ShipStation:access": "Open ShipStation menu",
+        "ShipStation:create": "Create ShipStation related data",
+        "ShipStation:read": "View ShipStation related data",
+        "ShipStation:update": "Update ShipStation related data",
+        "ShipStation:delete": "Delete ShipStation related data"
+    },
+    "settings": {
+        "ShipStation": {
+            "ShipStationPassword": {
+                "title": "ShipStation Password",
+                "description": "ShipStation Password setting"
+            },
+            "ShipStationEnabled": {
+                "title": "ShipStation Enabled",
+                "description": "ShipStation Enabled setting"
+            }
+        }
+    }
+}

@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+      <!-- Project is not a test project -->
+      <SonarQubeTestProject>false</SonarQubeTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VirtoCommerce.ShipStation.Core\VirtoCommerce.ShipStation.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Caching\" />
+    <Folder Include="ExportImport\" />
+    <Folder Include="Handlers\" />
+    <Folder Include="Models\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="VirtoCommerce.Platform.Data" Version="3.200.0" />
+  </ItemGroup>
+
+</Project>

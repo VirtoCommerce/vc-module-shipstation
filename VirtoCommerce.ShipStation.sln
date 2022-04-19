@@ -1,0 +1,52 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 16
+VisualStudioVersion = 16.0.29920.165
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CFC1B42A-2604-4030-BD28-7706B47C6365}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{60C5F34E-58CA-43A7-AFAF-57F20755E996}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.ShipStation.Web", "src\VirtoCommerce.ShipStation.Web\VirtoCommerce.ShipStation.Web.csproj", "{336A7DA9-A592-46B2-BF8E-E57989F76EF8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.ShipStation.Data", "src\VirtoCommerce.ShipStation.Data\VirtoCommerce.ShipStation.Data.csproj", "{8C6A004D-300E-43B0-8716-9C5353C21AF6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.ShipStation.Tests", "tests\VirtoCommerce.ShipStation.Tests\VirtoCommerce.ShipStation.Tests.csproj", "{166C831F-8AD0-4A1A-BFA7-4798066C2318}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.ShipStation.Core", "src\VirtoCommerce.ShipStation.Core\VirtoCommerce.ShipStation.Core.csproj", "{86033754-CA2D-4E53-AF46-51F3F158983B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{336A7DA9-A592-46B2-BF8E-E57989F76EF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{336A7DA9-A592-46B2-BF8E-E57989F76EF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{336A7DA9-A592-46B2-BF8E-E57989F76EF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{336A7DA9-A592-46B2-BF8E-E57989F76EF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C6A004D-300E-43B0-8716-9C5353C21AF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C6A004D-300E-43B0-8716-9C5353C21AF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C6A004D-300E-43B0-8716-9C5353C21AF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C6A004D-300E-43B0-8716-9C5353C21AF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{166C831F-8AD0-4A1A-BFA7-4798066C2318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{166C831F-8AD0-4A1A-BFA7-4798066C2318}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{166C831F-8AD0-4A1A-BFA7-4798066C2318}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{166C831F-8AD0-4A1A-BFA7-4798066C2318}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86033754-CA2D-4E53-AF46-51F3F158983B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86033754-CA2D-4E53-AF46-51F3F158983B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86033754-CA2D-4E53-AF46-51F3F158983B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86033754-CA2D-4E53-AF46-51F3F158983B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+    GlobalSection(NestedProjects) = preSolution
+		{336A7DA9-A592-46B2-BF8E-E57989F76EF8} = {CFC1B42A-2604-4030-BD28-7706B47C6365}
+		{8C6A004D-300E-43B0-8716-9C5353C21AF6} = {CFC1B42A-2604-4030-BD28-7706B47C6365}
+		{86033754-CA2D-4E53-AF46-51F3F158983B} = {CFC1B42A-2604-4030-BD28-7706B47C6365}
+		{166C831F-8AD0-4A1A-BFA7-4798066C2318} = {60C5F34E-58CA-43A7-AFAF-57F20755E996}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		C8D7B7D2-4EF6-4898-916F-371EFD814C47 = {C8D7B7D2-4EF6-4898-916F-371EFD814C47}
+	EndGlobalSection
+EndGlobal
