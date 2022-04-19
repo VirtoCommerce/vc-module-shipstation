@@ -8,8 +8,8 @@
 <!--        <dependency id="VirtoCommerce.Core" version="3.200.0" /> -->
     </dependencies>
 
-    <title>VirtoCommerce ShipStation extension module</title>
-    <description>VirtoCommerce ShipStation extension module</description>
+    <title>ShipStation module</title>
+    <description>VirtoCommerce ShipStation integration</description>
 
     <authors>
         <author>Dmitry Pushnitsa</author>
