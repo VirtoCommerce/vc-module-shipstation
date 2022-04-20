@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
-namespace VirtoCommerce.ShipStation.Data.Repositories;
+namespace VirtoCommerce.ShipStationModule.Data.Repositories;
 
 public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ShipStationDbContext>
 {

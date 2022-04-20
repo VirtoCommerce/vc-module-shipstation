@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace VirtoCommerce.ShipStation.Tests;
+namespace VirtoCommerce.ShipStationModule.Tests;
 
 public class Test
 {

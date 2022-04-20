@@ -19,9 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\VirtoCommerce.ShipStation.Core\VirtoCommerce.ShipStation.Core.csproj" />
-    <ProjectReference Include="..\..\src\VirtoCommerce.ShipStation.Data\VirtoCommerce.ShipStation.Data.csproj" />
-    <ProjectReference Include="..\..\src\VirtoCommerce.ShipStation.Web\VirtoCommerce.ShipStation.Web.csproj" />
+    <ProjectReference Include="..\..\src\VirtoCommerce.ShipStation.Core\VirtoCommerce.ShipStationModule.Core.csproj" />
+    <ProjectReference Include="..\..\src\VirtoCommerce.ShipStation.Data\VirtoCommerce.ShipStationModule.Data.csproj" />
+    <ProjectReference Include="..\..\src\VirtoCommerce.ShipStation.Web\VirtoCommerce.ShipStationModule.Web.csproj" />
   </ItemGroup>
 
 </Project>

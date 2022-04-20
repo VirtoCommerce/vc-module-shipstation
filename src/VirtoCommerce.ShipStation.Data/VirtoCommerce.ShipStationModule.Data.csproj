@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VirtoCommerce.ShipStation.Core\VirtoCommerce.ShipStation.Core.csproj" />
+    <ProjectReference Include="..\VirtoCommerce.ShipStation.Core\VirtoCommerce.ShipStationModule.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

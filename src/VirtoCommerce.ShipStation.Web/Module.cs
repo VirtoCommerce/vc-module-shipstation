@@ -6,10 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Core.Settings;
-using VirtoCommerce.ShipStation.Core;
-using VirtoCommerce.ShipStation.Data.Repositories;
+using VirtoCommerce.ShipStationModule.Core;
+using VirtoCommerce.ShipStationModule.Data.Repositories;
 
-namespace VirtoCommerce.ShipStation.Web;
+namespace VirtoCommerce.ShipStationModule.Web;
 
 public class Module : IModule, IHasConfiguration
 {

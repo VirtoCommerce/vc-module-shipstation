@@ -11,8 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VirtoCommerce.ShipStation.Core\VirtoCommerce.ShipStation.Core.csproj" />
-    <ProjectReference Include="..\VirtoCommerce.ShipStation.Data\VirtoCommerce.ShipStation.Data.csproj" />
+    <ProjectReference Include="..\VirtoCommerce.ShipStation.Core\VirtoCommerce.ShipStationModule.Core.csproj" />
+    <ProjectReference Include="..\VirtoCommerce.ShipStation.Data\VirtoCommerce.ShipStationModule.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="module.manifest">

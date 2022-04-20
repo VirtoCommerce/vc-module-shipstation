@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using VirtoCommerce.ShipStation.Core;
+using VirtoCommerce.ShipStationModule.Core;
 
-namespace VirtoCommerce.ShipStation.Web.Controllers.Api;
+namespace VirtoCommerce.ShipStationModule.Web.Controllers.Api;
 
 [Route("api/ShipStation")]
 public class ShipStationController : Controller

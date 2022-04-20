@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using VirtoCommerce.Platform.Core.Settings;
 
-namespace VirtoCommerce.ShipStation.Core;
+namespace VirtoCommerce.ShipStationModule.Core;
 
 public static class ModuleConstants
 {

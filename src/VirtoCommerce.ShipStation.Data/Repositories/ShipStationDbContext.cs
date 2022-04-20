@@ -1,7 +1,7 @@
 using EntityFrameworkCore.Triggers;
 using Microsoft.EntityFrameworkCore;
 
-namespace VirtoCommerce.ShipStation.Data.Repositories;
+namespace VirtoCommerce.ShipStationModule.Data.Repositories;
 
 public class ShipStationDbContext : DbContextWithTriggers
 {
