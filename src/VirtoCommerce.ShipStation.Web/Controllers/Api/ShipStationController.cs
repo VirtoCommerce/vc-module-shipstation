@@ -1,13 +1,9 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using VirtoCommerce.OrdersModule.Core.Model;
-using VirtoCommerce.OrdersModule.Core.Model.Search;
 using VirtoCommerce.Platform.Core.Common;
-using VirtoCommerce.Platform.Core.GenericCrud;
 using VirtoCommerce.ShipStationModule.Core.Models;
-using VirtoCommerce.ShipStationModule.Data.Extensions;
+using VirtoCommerce.ShipStationModule.Core.Services;
 using VirtoCommerce.ShipStationModule.Web.Attributes;
 
 namespace VirtoCommerce.ShipStationModule.Web.Controllers.Api;
@@ -16,18 +12,11 @@ namespace VirtoCommerce.ShipStationModule.Web.Controllers.Api;
 [ControllerXmlResponse]
 public class ShipStationController : Controller
 {
-    private readonly ISearchService<CustomerOrderSearchCriteria, CustomerOrderSearchResult, CustomerOrder>
-        _customerOrderSearchService;
+    private readonly IShipStationService _shipStationService;
 
-    private readonly ICrudService<CustomerOrder> _customerOrderService;
-
-    public ShipStationController(
-        ISearchService<CustomerOrderSearchCriteria, CustomerOrderSearchResult, CustomerOrder>
-            customerOrderSearchService,
-        ICrudService<CustomerOrder> customerOrderService)
+    public ShipStationController(IShipStationService shipStationService)
     {
-        _customerOrderSearchService = customerOrderSearchService;
-        _customerOrderService = customerOrderService;
+        _shipStationService = shipStationService;
     }
 
     [HttpGet]
@@ -38,25 +27,10 @@ public class ShipStationController : Controller
     {
         if (action.EqualsInvariant("export"))
         {
-            var customerOrderSearchCriteria = new CustomerOrderSearchCriteria
-            {
-                StartDate = DateTime.Parse(start_date),
-                EndDate = DateTime.Parse(end_date),
-                StoreIds = new[] { storeId },
-            };
+            var startDate = DateTime.Parse(start_date);
+            var endDate = DateTime.Parse(end_date);
 
-            if (page > 1)
-            {
-                customerOrderSearchCriteria.Skip = customerOrderSearchCriteria.Take * (page - 1);
-            }
-
-            var searchResult = await _customerOrderSearchService.SearchAsync(customerOrderSearchCriteria);
-
-            var result = new ShipStationOrdersResponse
-            {
-                Order = searchResult.Results.Select(x => x.ToShipStationOrder()).ToArray(),
-                Pages = (int)Math.Round((decimal)(searchResult.TotalCount / customerOrderSearchCriteria.Take), MidpointRounding.ToPositiveInfinity),
-            };
+            var result = await _shipStationService.GetOrdersAsync(storeId, startDate, endDate, page);
 
             return Ok(result);
         }
@@ -70,17 +44,6 @@ public class ShipStationController : Controller
         [FromRoute] string carrier, [FromRoute] string service, [FromRoute] string tracking_number,
         [FromBody] ShipNotice shipNotice)
     {
-        var customerOrderSearchCriteria = new CustomerOrderSearchCriteria();
-
-        var customerOrderSearchResult = await _customerOrderSearchService.SearchAsync(customerOrderSearchCriteria);
-
-        var customerOrder = customerOrderSearchResult.Results.FirstOrDefault();
-
-        if (customerOrder != null)
-        {
-
-        }
-
         return Ok();
     }
 

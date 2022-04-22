@@ -7,7 +7,9 @@ using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Core.Settings;
 using VirtoCommerce.ShipStationModule.Core;
+using VirtoCommerce.ShipStationModule.Core.Services;
 using VirtoCommerce.ShipStationModule.Data.Repositories;
+using VirtoCommerce.ShipStationModule.Data.Services;
 
 namespace VirtoCommerce.ShipStationModule.Web;
 
@@ -24,6 +26,8 @@ public class Module : IModule, IHasConfiguration
             var configuration = provider.GetRequiredService<IConfiguration>();
             options.UseSqlServer(configuration.GetConnectionString(ModuleInfo.Id) ?? configuration.GetConnectionString("VirtoCommerce"));
         });
+
+        serviceCollection.AddTransient<IShipStationService, ShipStationService>();
     }
 
     public void PostInitialize(IApplicationBuilder appBuilder)
