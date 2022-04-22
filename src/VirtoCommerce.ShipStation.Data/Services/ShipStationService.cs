@@ -31,6 +31,7 @@ public class ShipStationService : IShipStationService
             StartDate = startDate,
             EndDate = endDate,
             StoreIds = new[] { storeId },
+            ResponseGroup = CustomerOrderResponseGroup.Full.ToString(),
         };
 
         if (page > 1)
