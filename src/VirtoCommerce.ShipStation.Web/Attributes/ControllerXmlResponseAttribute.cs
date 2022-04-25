@@ -20,5 +20,6 @@ public class ControllerXmlResponseAttribute : Attribute, IResultFilter
 
     public void OnResultExecuted(ResultExecutedContext context)
     {
+        // There is nothing to do here
     }
 }
