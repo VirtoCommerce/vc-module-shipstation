@@ -43,9 +43,8 @@ public class ShipStationController : Controller
     [Route("")]
     public async Task<ActionResult> UpdateOrder([FromRoute] string storeId, [FromRoute] string order_number,
         [FromRoute] string carrier, [FromRoute] string service, [FromRoute] string tracking_number,
-        [FromBody] ShipNotice shipNotice)
+        [FromXmlBody] ShipNotice shipNotice)
     {
         return Ok();
     }
-
 }
