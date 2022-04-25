@@ -5,6 +5,7 @@ namespace VirtoCommerce.ShipStationModule.Core;
 
 public static class ModuleConstants
 {
+    public const string DateTimeFormat = "MM'/'dd'/'yyyy HH:mm";
     public static class Security
     {
         public static class Permissions

@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VirtoCommerce.Platform.Core.Common;
+using VirtoCommerce.ShipStationModule.Core;
 using VirtoCommerce.ShipStationModule.Core.Models;
 using VirtoCommerce.ShipStationModule.Core.Services;
 using VirtoCommerce.ShipStationModule.Web.Attributes;
@@ -27,8 +28,8 @@ public class ShipStationController : Controller
     {
         if (action.EqualsInvariant("export"))
         {
-            var startDate = DateTime.ParseExact(start_date, "MM'/'dd'/'yyyy HH:mm", CultureInfo.InvariantCulture);
-            var endDate = DateTime.ParseExact(end_date, "MM'/'dd'/'yyyy HH:mm", CultureInfo.InvariantCulture);
+            var startDate = DateTime.ParseExact(start_date, ModuleConstants.DateTimeFormat, CultureInfo.InvariantCulture);
+            var endDate = DateTime.ParseExact(end_date, ModuleConstants.DateTimeFormat, CultureInfo.InvariantCulture);
 
             var result = await _shipStationService.GetOrdersAsync(storeId, startDate, endDate, page);
 

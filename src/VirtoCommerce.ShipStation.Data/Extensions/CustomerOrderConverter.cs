@@ -3,6 +3,7 @@ using System.Xml;
 using VirtoCommerce.CoreModule.Core.Common;
 using VirtoCommerce.OrdersModule.Core.Model;
 using VirtoCommerce.Platform.Core.Common;
+using VirtoCommerce.ShipStationModule.Core;
 using VirtoCommerce.ShipStationModule.Core.Models;
 
 namespace VirtoCommerce.ShipStationModule.Data.Extensions;
@@ -16,7 +17,7 @@ public static class CustomerOrderConverter
             OrderNumber = ToCDataSection(customerOrder.Number),
             OrderId = ToCDataSection(customerOrder.Id),
             OrderStatus = ToCDataSection(customerOrder.Status),
-            OrderDate = customerOrder.CreatedDate.ToString("MM'/'dd'/'yyyy HH:mm"),
+            OrderDate = customerOrder.CreatedDate.ToString(ModuleConstants.DateTimeFormat),
             LastModified = GetLastModified(customerOrder),
             OrderTotal = customerOrder.Sum,
             ShippingAmount = customerOrder.Shipments.Sum(x => x.Sum),
@@ -107,8 +108,8 @@ public static class CustomerOrderConverter
     }
 
     private static string GetLastModified(CustomerOrder customerOrder) =>
-        customerOrder.ModifiedDate?.ToString("MM'/'dd'/'yyyy HH:mm") ??
-        customerOrder.CreatedDate.ToString("MM'/'dd'/'yyyy HH:mm");
+        customerOrder.ModifiedDate?.ToString(ModuleConstants.DateTimeFormat) ??
+        customerOrder.CreatedDate.ToString(ModuleConstants.DateTimeFormat);
 
     private static string GetShippingMethodCode(CustomerOrder customerOrder) => customerOrder.Shipments.FirstOrDefault()?.ShipmentMethodCode;
 
