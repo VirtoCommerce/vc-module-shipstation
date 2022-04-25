@@ -22,7 +22,6 @@ public class ShipStationController : Controller
 
     [HttpGet]
     [Route("")]
-    // TODO: Add authorization
     public async Task<ActionResult<string>> GetOrders([FromRoute] string storeId, [FromQuery] string action,
         [FromQuery] string start_date, [FromQuery] string end_date, [FromQuery] int page)
     {
