@@ -92,6 +92,23 @@ public static class CustomerOrderConverter
         return result;
     }
 
+    public static CustomerOrder Patch(this CustomerOrder customerOrder, ShipNotice shipNotice)
+    {
+        if (!customerOrder.Shipments.IsNullOrEmpty())
+        {
+            foreach (var shipment in customerOrder.Shipments)
+            {
+                shipment.Status = "Sent";
+                shipment.Number = shipNotice.TrackingNumber;
+            }
+
+            customerOrder.Status = "Completed";
+        }
+
+        return customerOrder;
+    }
+
+
     private static XmlCDataSection ToCDataSection(string value)
     {
         return new XmlDocument().CreateCDataSection(value);

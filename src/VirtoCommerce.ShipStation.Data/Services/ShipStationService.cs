@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VirtoCommerce.OrdersModule.Core.Model;
@@ -50,13 +51,37 @@ public class ShipStationService : IShipStationService
         return result;
     }
 
+    public virtual async Task<CustomerOrder> UpdateOrderAsync(ShipNotice shipNotice)
+    {
+        var customerOrderSearchCriteria = new CustomerOrderSearchCriteria
+        {
+            Number = shipNotice.OrderNumber,
+            ResponseGroup = CustomerOrderResponseGroup.Full.ToString(),
+        };
+
+        var updatedOrder = (await _customerOrderSearchService.SearchAsync(customerOrderSearchCriteria)).Results.FirstOrDefault();
+
+        if (updatedOrder is not null)
+        {
+            updatedOrder = PatchCustomerOrder(updatedOrder, shipNotice);
+
+            await _customerOrderService.SaveChangesAsync(new List<CustomerOrder> { updatedOrder });
+        }
+
+        return updatedOrder;
+    }
+
+
+    protected virtual CustomerOrder PatchCustomerOrder(CustomerOrder customerOrder, ShipNotice shipNotice)
+    {
+        return customerOrder.Patch(shipNotice);
+    }
+
     protected virtual ShipStationOrder ToShipStationOrder(CustomerOrder order)
     {
         return order.ToShipStationOrder();
     }
 
-    public virtual Task UpdateOrderAsync()
-    {
-        return Task.CompletedTask;
-    }
+
+
 }

@@ -45,6 +45,9 @@ public class ShipStationController : Controller
         [FromRoute] string carrier, [FromRoute] string service, [FromRoute] string tracking_number,
         [FromXmlBody] ShipNotice shipNotice)
     {
-        return Ok();
+
+        var result = await _shipStationService.UpdateOrderAsync(shipNotice);
+
+        return result is not null ? Ok() : BadRequest();
     }
 }
