@@ -14,6 +14,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.ShipStationMo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.ShipStationModule.Core", "src\VirtoCommerce.ShipStation.Core\VirtoCommerce.ShipStationModule.Core.csproj", "{86033754-CA2D-4E53-AF46-51F3F158983B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{A0195EA9-DA99-4827-8C71-500A138F188F}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		.nuke = .nuke
+		Directory.Build.props = Directory.Build.props
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,7 +57,7 @@ Global
 		{86033754-CA2D-4E53-AF46-51F3F158983B} = {CFC1B42A-2604-4030-BD28-7706B47C6365}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		C8D7B7D2-4EF6-4898-916F-371EFD814C47 = {C8D7B7D2-4EF6-4898-916F-371EFD814C47}
 		SolutionGuid = {823B321C-F350-41E6-9680-56CBEF97E2F9}
+		C8D7B7D2-4EF6-4898-916F-371EFD814C47 = {C8D7B7D2-4EF6-4898-916F-371EFD814C47}
 	EndGlobalSection
 EndGlobal
