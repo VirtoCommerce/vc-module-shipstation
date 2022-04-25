@@ -44,7 +44,7 @@ public class ShipStationService : IShipStationService
         var result = new ShipStationOrdersResponse
         {
             Order = searchResult.Results.Select(ToShipStationOrder).ToArray(),
-            Pages = (int)Math.Round((decimal)(searchResult.TotalCount / customerOrderSearchCriteria.Take), MidpointRounding.ToPositiveInfinity),
+            Pages = (int)Math.Round((decimal)searchResult.TotalCount / customerOrderSearchCriteria.Take, MidpointRounding.ToPositiveInfinity),
         };
 
         return result;
