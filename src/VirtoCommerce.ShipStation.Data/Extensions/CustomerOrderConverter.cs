@@ -17,17 +17,15 @@ public static class CustomerOrderConverter
             OrderId = ToCDataSection(customerOrder.Id),
             OrderStatus = ToCDataSection(customerOrder.Status),
             OrderDate = customerOrder.CreatedDate.ToString("MM'/'dd'/'yyyy HH:mm"),
-            LastModified =
-                customerOrder.ModifiedDate?.ToString("MM'/'dd'/'yyyy HH:mm") ??
-                customerOrder.CreatedDate.ToString("MM'/'dd'/'yyyy HH:mm"),
+            LastModified = GetLastModified(customerOrder),
             OrderTotal = customerOrder.Sum,
             ShippingAmount = customerOrder.Shipments.Sum(x => x.Sum),
             TaxAmount = customerOrder.TaxTotal,
-            ShippingMethod = ToCDataSection(customerOrder.Shipments.FirstOrDefault()?.ShipmentMethodCode),
-            PaymentMethod = ToCDataSection(customerOrder.InPayments.FirstOrDefault()?.GatewayCode),
+            ShippingMethod = ToCDataSection(GetShippingMethodCode(customerOrder)),
+            PaymentMethod = ToCDataSection(GetPaymentMethod(customerOrder)),
             Items = customerOrder
                 .Shipments
-                .Where(x => x.Items != null && x.Items.Any())
+                .Where(x => !x.Items.IsNullOrEmpty())
                 .SelectMany(x => x.Items.Select(y =>
                 {
                     var lineItem = y.LineItem;
@@ -38,15 +36,9 @@ public static class CustomerOrderConverter
                         ImageUrl = ToCDataSection(lineItem.ImageUrl),
                         Name = ToCDataSection(lineItem.Name),
                         Quantity = lineItem.Quantity,
-                        UnitPrice =
-                            customerOrder.Items.SingleOrDefault(i => i.ProductId.EqualsInvariant(lineItem.ProductId))
-                                ?.Price ?? decimal.Zero,
-                        Weight =
-                            customerOrder.Items.SingleOrDefault(i => i.ProductId.EqualsInvariant(lineItem.ProductId))
-                                ?.Weight ?? decimal.Zero,
-                        WeightUnits = customerOrder.Items
-                            .SingleOrDefault(i => i.ProductId.EqualsInvariant(lineItem.ProductId))?.WeightUnit,
-
+                        UnitPrice = GetUnitPrice(customerOrder, lineItem),
+                        Weight = GetWeight(customerOrder, lineItem),
+                        WeightUnits = GetWeightUnit(customerOrder, lineItem),
                     };
 
                     return item;
@@ -55,7 +47,7 @@ public static class CustomerOrderConverter
             Customer = new ShipStationCustomer { CustomerCode = ToCDataSection(customerOrder.CustomerId), }
         };
 
-        if (customerOrder.Addresses is not null && customerOrder.Addresses.Any())
+        if (!customerOrder.Addresses.IsNullOrEmpty())
         {
             var billAddress = customerOrder.Addresses.FirstOrDefault(x => x.AddressType is AddressType.Billing or AddressType.BillingAndShipping) ??
                               customerOrder.Addresses.FirstOrDefault();
@@ -113,4 +105,23 @@ public static class CustomerOrderConverter
     {
         return new XmlDocument().CreateCDataSection(value);
     }
+
+    private static string GetLastModified(CustomerOrder customerOrder) =>
+        customerOrder.ModifiedDate?.ToString("MM'/'dd'/'yyyy HH:mm") ??
+        customerOrder.CreatedDate.ToString("MM'/'dd'/'yyyy HH:mm");
+
+    private static string GetShippingMethodCode(CustomerOrder customerOrder) => customerOrder.Shipments.FirstOrDefault()?.ShipmentMethodCode;
+
+    private static string GetPaymentMethod(CustomerOrder customerOrder) => customerOrder.InPayments.FirstOrDefault()?.GatewayCode;
+
+    private static decimal GetUnitPrice(CustomerOrder customerOrder, LineItem lineItem) => customerOrder.Items
+        .SingleOrDefault(i => i.ProductId.EqualsInvariant(lineItem.ProductId))?.Price ??
+        decimal.Zero;
+
+    private static decimal GetWeight(CustomerOrder customerOrder, LineItem lineItem) => customerOrder.Items
+        .SingleOrDefault(i => i.ProductId.EqualsInvariant(lineItem.ProductId))?.Weight ??
+        decimal.Zero;
+
+    private static string GetWeightUnit(CustomerOrder customerOrder, LineItem lineItem) => customerOrder.Items
+        .SingleOrDefault(i => i.ProductId.EqualsInvariant(lineItem.ProductId))?.WeightUnit;
 }
