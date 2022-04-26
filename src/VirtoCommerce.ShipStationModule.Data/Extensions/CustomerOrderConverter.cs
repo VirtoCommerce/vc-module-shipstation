@@ -45,7 +45,12 @@ public static class CustomerOrderConverter
                     return item;
                 }))
                 .ToArray(),
-            Customer = new ShipStationCustomer { CustomerCode = ToCDataSection(customerOrder.CustomerId), }
+            Customer = new ShipStationCustomer
+            {
+                CustomerCode = ToCDataSection(customerOrder.CustomerId),
+                BillTo = new ShipStationBillTo(),
+                ShipTo = new ShipStationShipTo(),
+            }
         };
 
         if (!customerOrder.Addresses.IsNullOrEmpty())
@@ -55,30 +60,24 @@ public static class CustomerOrderConverter
 
             if (billAddress is not null)
             {
-                result.Customer.BillTo = new ShipStationBillTo
-                {
-                    Company = ToCDataSection(billAddress.Organization),
-                    Name = ToCDataSection($"{billAddress.FirstName} {billAddress.LastName}"),
-                    Phone = ToCDataSection(billAddress.Phone),
-                };
+                result.Customer.BillTo.Company = ToCDataSection(billAddress.Organization);
+                result.Customer.BillTo.Name = ToCDataSection($"{billAddress.FirstName} {billAddress.LastName}");
+                result.Customer.BillTo.Phone = ToCDataSection(billAddress.Phone);
             }
 
             var shipAddress = customerOrder.Addresses.FirstOrDefault(x => x.AddressType is AddressType.Shipping or AddressType.BillingAndShipping);
 
             if (shipAddress is not null)
             {
-                result.Customer.ShipTo = new ShipStationShipTo
-                {
-                    Company = ToCDataSection(shipAddress.Organization),
-                    Name = ToCDataSection($"{shipAddress.FirstName} {shipAddress.LastName}"),
-                    Phone = ToCDataSection(shipAddress.Phone),
-                    Address1 = ToCDataSection(shipAddress.Line1),
-                    Address2 = ToCDataSection(shipAddress.Line2),
-                    City = ToCDataSection(shipAddress.City),
-                    PostalCode = ToCDataSection(shipAddress.PostalCode),
-                    Country = ToCDataSection(shipAddress.CountryCode.ConvertToTwoLetterCountryCode()),
-                    State = ToCDataSection(shipAddress.RegionId ?? shipAddress.RegionName),
-                };
+                result.Customer.ShipTo.Company = ToCDataSection(shipAddress.Organization);
+                result.Customer.ShipTo.Name = ToCDataSection($"{shipAddress.FirstName} {shipAddress.LastName}");
+                result.Customer.ShipTo.Phone = ToCDataSection(shipAddress.Phone);
+                result.Customer.ShipTo.Address1 = ToCDataSection(shipAddress.Line1);
+                result.Customer.ShipTo.Address2 = ToCDataSection(shipAddress.Line2);
+                result.Customer.ShipTo.City = ToCDataSection(shipAddress.City);
+                result.Customer.ShipTo.PostalCode = ToCDataSection(shipAddress.PostalCode);
+                result.Customer.ShipTo.Country = ToCDataSection(shipAddress.CountryCode.ConvertToTwoLetterCountryCode());
+                result.Customer.ShipTo.State = ToCDataSection(shipAddress.RegionId ?? shipAddress.RegionName);
             }
         }
 
