@@ -27,12 +27,3 @@ public class ShipStationItem
 
     public bool Adjustment { get; set; }
 }
-
-public class ShipStationOption
-{
-    public XmlCDataSection Name { get; set; }
-
-    public XmlCDataSection Value { get; set; }
-
-    public decimal Weight { get; set; }
-}
