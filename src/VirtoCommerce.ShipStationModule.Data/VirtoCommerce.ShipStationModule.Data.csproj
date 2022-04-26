@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VirtoCommerce.ShipStation.Core\VirtoCommerce.ShipStationModule.Core.csproj" />
+    <ProjectReference Include="..\VirtoCommerce.ShipStationModule.Core\VirtoCommerce.ShipStationModule.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

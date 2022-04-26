@@ -6,13 +6,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CFC1B42A-260
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{60C5F34E-58CA-43A7-AFAF-57F20755E996}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.ShipStationModule.Web", "src\VirtoCommerce.ShipStationModule.Web\VirtoCommerce.ShipStationModule.Web.csproj", "{336A7DA9-A592-46B2-BF8E-E57989F76EF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.ShipStationModule.Web", "src\VirtoCommerce.ShipStation.Web\VirtoCommerce.ShipStationModule.Web.csproj", "{336A7DA9-A592-46B2-BF8E-E57989F76EF8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.ShipStationModule.Data", "src\VirtoCommerce.ShipStationModule.Data\VirtoCommerce.ShipStationModule.Data.csproj", "{8C6A004D-300E-43B0-8716-9C5353C21AF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.ShipStationModule.Data", "src\VirtoCommerce.ShipStation.Data\VirtoCommerce.ShipStationModule.Data.csproj", "{8C6A004D-300E-43B0-8716-9C5353C21AF6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.ShipStationModule.Tests", "tests\VirtoCommerce.ShipStationModule.Tests\VirtoCommerce.ShipStationModule.Tests.csproj", "{166C831F-8AD0-4A1A-BFA7-4798066C2318}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.ShipStationModule.Tests", "tests\VirtoCommerce.ShipStation.Tests\VirtoCommerce.ShipStationModule.Tests.csproj", "{166C831F-8AD0-4A1A-BFA7-4798066C2318}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.ShipStationModule.Core", "src\VirtoCommerce.ShipStationModule.Core\VirtoCommerce.ShipStationModule.Core.csproj", "{86033754-CA2D-4E53-AF46-51F3F158983B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.ShipStationModule.Core", "src\VirtoCommerce.ShipStation.Core\VirtoCommerce.ShipStationModule.Core.csproj", "{86033754-CA2D-4E53-AF46-51F3F158983B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{A0195EA9-DA99-4827-8C71-500A138F188F}"
 	ProjectSection(SolutionItems) = preProject
