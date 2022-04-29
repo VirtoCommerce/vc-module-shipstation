@@ -1,35 +1,19 @@
-# ShipStation Fulfillment Module
+# ShipStation integration Module
+
+[![CI status](https://github.com/VirtoCommerce/vc-module-shipstation/workflows/Module%20CI/badge.svg?branch=dev)](https://github.com/VirtoCommerce/vc-module-shipstation/actions?query=workflow%3A"Module+CI") [![Quality gate](https://sonarcloud.io/api/project_badges/measure?project=VirtoCommerce_vc-module-shipstation&metric=alert_status&branch=dev)](https://sonarcloud.io/dashboard?id=VirtoCommerce_vc-module-shipstation) [![Reliability rating](https://sonarcloud.io/api/project_badges/measure?project=VirtoCommerce_vc-module-shipstation&metric=reliability_rating&branch=dev)](https://sonarcloud.io/dashboard?id=VirtoCommerce_vc-module-shipstation) [![Security rating](https://sonarcloud.io/api/project_badges/measure?project=VirtoCommerce_vc-module-shipstation&metric=security_rating&branch=dev)](https://sonarcloud.io/dashboard?id=VirtoCommerce_vc-module-shipstation) [![Sqale rating](https://sonarcloud.io/api/project_badges/measure?project=VirtoCommerce_vc-module-shipstation&metric=sqale_rating&branch=dev)](https://sonarcloud.io/dashboard?id=VirtoCommerce_vc-module-shipstation)
+
 ShipStation fulfillment module enables synchronizing customer orders with <a href="http://www.shipstation.com/" target="_blank">ShipStation</a>. That way new orders with shipments placed in VirtoCommerce will become available in ShipStation admin and changes of shipment status will be synced with VirtoCommerce orders.
 
-# Installation
-Installing the module:
-* Automatically: in VC Manager go to Configuration -> Modules -> ShipStation fulfillment -> Install
-* Manually: download module zip package from https://github.com/VirtoCommerce/vc-module-Shipstation/releases. In VC Manager go to Configuration -> Modules -> Advanced -> upload module package -> Install.
+## Key features
+* Export orders specified by store
+* Updating order's and shipping's statuses when shipstation make an action
 
-Connecting to ShipStation:
+## Documentation
+* [ShipStation module Documentation](https://virtocommerce.com/docs/latest/modules/shipstation)
+* [View on GitHub](docs/index.md)
 
-Follow the steps provided in <a href="https://help.shipstation.com/hc/en-us/articles/360025856192-Custom-Store-Development-Guide" target="_blank">Connect to ShipStation</a> section of ShipStation's Custom Store Development Guide.
+## References
+* Home: https://shipstation.com/
+* Integration guide: https://help.shipstation.com/hc/en-us/articles/360025856192-Custom-Store-Development-Guide
+* [Download latest release](https://github.com/VirtoCommerce/vc-module-shipstation/releases/latest)
 
-Be sure that "URL to custom XML page" parameter points to your public Commerce Manager site and ends with "/api/shipstation/{storeId}":
-![image](https://cloud.githubusercontent.com/assets/5801549/17191416/87e432c8-5452-11e6-981a-0cde04183dec.png)
-
-Ensure to type corresponding order statuses from VirtoCommerce like "New", "Processing", etc.
-
-Check "Bringing Orders into ShipStation" and "Send Shipping Notifications from ShipStation" sections on the same guide onwards.
-
-# Settings
-This module has no settings defined as all integration actions are initiated from ShipStation system.
-
-# License
-Copyright (c) Virtosoftware Ltd.  All rights reserved.
-
-Licensed under the Virto Commerce Open Software License (the "License"); you
-may not use this file except in compliance with the License. You may
-obtain a copy of the License at
-
-http://virtocommerce.com/opensourcelicense
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-implied.
