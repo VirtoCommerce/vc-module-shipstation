@@ -9,7 +9,7 @@ ShipStation fulfillment module enables synchronizing customer orders with <a hre
 * Updating order's and shipping's statuses when shipstation make an action
 
 ## Documentation
-* [ShipStation module Documentation](https://virtocommerce.com/docs/latest/modules/shipstation)
+* [ShipStation module Documentation](https://virtocommerce.com/docs/modules/shipstation)
 * [View on GitHub](docs/index.md)
 
 ## References
