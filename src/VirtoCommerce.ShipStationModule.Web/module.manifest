@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <module xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <id>VirtoCommerce.ShipStation</id>
-    <version>3.202.0</version>
+    <version>3.400.0</version>
     <version-tag />
-    <platformVersion>3.200.0</platformVersion>
+    <platformVersion>3.400.0</platformVersion>
     <title>ShipStation Integration</title>
     <description>Enables synchronizing customer orders with ShipStation</description>
     <authors>
@@ -21,7 +21,7 @@
     <assemblyFile>VirtoCommerce.ShipStationModule.Web.dll</assemblyFile>
     <moduleType>VirtoCommerce.ShipStationModule.Web.Module, VirtoCommerce.ShipStationModule.Web</moduleType>
     <dependencies>
-        <dependency id="VirtoCommerce.Orders" version="3.200.0" />
+        <dependency id="VirtoCommerce.Orders" version="3.400.0" />
     </dependencies>
     <useFullTypeNameInSwagger>false</useFullTypeNameInSwagger>
 </module>

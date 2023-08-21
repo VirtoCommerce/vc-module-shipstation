@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VirtoCommerce.OrdersModule.Core.Model;
 using VirtoCommerce.OrdersModule.Core.Model.Search;
-using VirtoCommerce.Platform.Core.GenericCrud;
+using VirtoCommerce.OrdersModule.Core.Services;
 using VirtoCommerce.ShipStationModule.Core.Models;
 using VirtoCommerce.ShipStationModule.Core.Services;
 using VirtoCommerce.ShipStationModule.Data.Extensions;
@@ -13,12 +13,12 @@ namespace VirtoCommerce.ShipStationModule.Data.Services;
 
 public class ShipStationService : IShipStationService
 {
-    private readonly ISearchService<CustomerOrderSearchCriteria, CustomerOrderSearchResult, CustomerOrder> _customerOrderSearchService;
-    private readonly ICrudService<CustomerOrder> _customerOrderService;
+    private readonly ICustomerOrderSearchService _customerOrderSearchService;
+    private readonly ICustomerOrderService _customerOrderService;
 
     public ShipStationService(
-        ISearchService<CustomerOrderSearchCriteria, CustomerOrderSearchResult, CustomerOrder> customerOrderSearchService,
-        ICrudService<CustomerOrder> customerOrderService
+        ICustomerOrderSearchService customerOrderSearchService,
+        ICustomerOrderService customerOrderService
         )
     {
         _customerOrderSearchService = customerOrderSearchService;
