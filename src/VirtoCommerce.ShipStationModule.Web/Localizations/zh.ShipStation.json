@@ -1,0 +1,28 @@
+{
+  "ShipStation": {
+    "blades": {
+      "hello-world": {
+        "title": "你好世界刀片"
+      }
+    }
+  },
+  "permissions": {
+    "ShipStation:access": "打开ShipStation菜单",
+    "ShipStation:create": "创建与ShipStation相关的数据",
+    "ShipStation:read": "查看与ShipStation相关的数据",
+    "ShipStation:update": "更新与ShipStation相关的数据",
+    "ShipStation:delete": "删除与ShipStation相关的数据"
+  },
+  "settings": {
+    "ShipStation": {
+      "ShipStationPassword": {
+        "title": "ShipStation密码",
+        "description": "设置ShipStation密码"
+      },
+      "ShipStationEnabled": {
+        "title": "ShipStation",
+        "description": "启用/禁用ShipStation设置"
+      }
+    }
+  }
+}

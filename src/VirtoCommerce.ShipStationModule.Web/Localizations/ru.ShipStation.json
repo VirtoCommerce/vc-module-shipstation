@@ -1,0 +1,28 @@
+{
+  "ShipStation": {
+    "blades": {
+      "hello-world": {
+        "title": "Лезвие Привет, мир"
+      }
+    }
+  },
+  "permissions": {
+    "ShipStation:access": "Открыть меню ShipStation",
+    "ShipStation:create": "Создать данные, связанные с ShipStation",
+    "ShipStation:read": "Просмотр данных, связанных с ShipStation",
+    "ShipStation:update": "Обновить данные, связанные с ShipStation",
+    "ShipStation:delete": "Удалить данные, связанные с ShipStation"
+  },
+  "settings": {
+    "ShipStation": {
+      "ShipStationPassword": {
+        "title": "Пароль ShipStation",
+        "description": "Установить пароль для ShipStation"
+      },
+      "ShipStationEnabled": {
+        "title": "ShipStation",
+        "description": "Включить/отключить настройку ShipStation"
+      }
+    }
+  }
+}
