@@ -16,12 +16,12 @@
     "settings": {
         "ShipStation": {
             "ShipStationPassword": {
-                "title": "ShipStation Password",
-                "description": "ShipStation Password setting"
+                "title": "ShipStation password",
+                "description": "Set ShipStation password"
             },
             "ShipStationEnabled": {
-                "title": "ShipStation Enabled",
-                "description": "ShipStation Enabled setting"
+                "title": "ShipStation",
+                "description": "Enable/ disable ShipStation setting"
             }
         }
     }

@@ -1,0 +1,28 @@
+{
+  "ShipStation": {
+    "blades": {
+      "hello-world": {
+        "title": "Scheda Ciao Mondo"
+      }
+    }
+  },
+  "permissions": {
+    "ShipStation:access": "Apri il menu ShipStation",
+    "ShipStation:create": "Crea dati correlati a ShipStation",
+    "ShipStation:read": "Visualizza dati correlati a ShipStation",
+    "ShipStation:update": "Aggiorna dati correlati a ShipStation",
+    "ShipStation:delete": "Elimina dati correlati a ShipStation"
+  },
+  "settings": {
+    "ShipStation": {
+      "ShipStationPassword": {
+        "title": "Password ShipStation",
+        "description": "Imposta la password di ShipStation"
+      },
+      "ShipStationEnabled": {
+        "title": "ShipStation",
+        "description": "Abilita/disabilita l'impostazione ShipStation"
+      }
+    }
+  }
+}

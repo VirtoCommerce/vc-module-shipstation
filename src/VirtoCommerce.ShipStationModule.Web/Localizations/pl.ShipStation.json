@@ -1,0 +1,28 @@
+{
+  "ShipStation": {
+    "blades": {
+      "hello-world": {
+        "title": "Ostrze Witaj świecie"
+      }
+    }
+  },
+  "permissions": {
+    "ShipStation:access": "Otwórz menu ShipStation",
+    "ShipStation:create": "Utwórz dane związane z ShipStation",
+    "ShipStation:read": "Wyświetl dane związane z ShipStation",
+    "ShipStation:update": "Zaktualizuj dane związane z ShipStation",
+    "ShipStation:delete": "Usuń dane związane z ShipStation"
+  },
+  "settings": {
+    "ShipStation": {
+      "ShipStationPassword": {
+        "title": "Hasło ShipStation",
+        "description": "Ustaw hasło do ShipStation"
+      },
+      "ShipStationEnabled": {
+        "title": "ShipStation",
+        "description": "Włącz/wyłącz ustawienie ShipStation"
+      }
+    }
+  }
+}

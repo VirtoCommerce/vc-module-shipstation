@@ -1,0 +1,28 @@
+{
+  "ShipStation": {
+    "blades": {
+      "hello-world": {
+        "title": "ハローワールドブレード"
+      }
+    }
+  },
+  "permissions": {
+    "ShipStation:access": "ShipStationメニューを開く",
+    "ShipStation:create": "ShipStation関連データを作成",
+    "ShipStation:read": "ShipStation関連データを表示",
+    "ShipStation:update": "ShipStation関連データを更新",
+    "ShipStation:delete": "ShipStation関連データを削除"
+  },
+  "settings": {
+    "ShipStation": {
+      "ShipStationPassword": {
+        "title": "ShipStationパスワード",
+        "description": "ShipStationパスワードを設定"
+      },
+      "ShipStationEnabled": {
+        "title": "ShipStation",
+        "description": "ShipStation設定を有効/無効にする"
+      }
+    }
+  }
+}
