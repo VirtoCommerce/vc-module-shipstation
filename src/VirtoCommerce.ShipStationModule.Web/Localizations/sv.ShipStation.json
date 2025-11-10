@@ -1,0 +1,28 @@
+{
+    "ShipStation": {
+        "blades": {
+            "hello-world": {
+                "title": "Hej världen-blad"
+            }
+        }
+    },
+    "permissions": {
+        "ShipStation:access": "Öppna ShipStation-menyn",
+        "ShipStation:create": "Skapa ShipStation-relaterad data",
+        "ShipStation:read": "Visa ShipStation-relaterad data",
+        "ShipStation:update": "Uppdatera ShipStation-relaterad data",
+        "ShipStation:delete": "Radera ShipStation-relaterad data"
+    },
+    "settings": {
+        "ShipStation": {
+            "ShipStationPassword": {
+                "title": "ShipStation-lösenord",
+                "description": "Ange ShipStation-lösenord"
+            },
+            "ShipStationEnabled": {
+                "title": "ShipStation",
+                "description": "Aktivera/inaktivera ShipStation-inställning"
+            }
+        }
+    }
+}
