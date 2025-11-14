@@ -21,7 +21,7 @@
             },
             "ShipStationEnabled": {
                 "title": "ShipStation",
-                "description": "Enable/ disable ShipStation setting"
+                "description": "Enable/disable ShipStation setting"
             }
         }
     }

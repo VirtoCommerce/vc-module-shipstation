@@ -1,0 +1,28 @@
+{
+    "ShipStation": {
+        "blades": {
+            "hello-world": {
+                "title": "Hei maailma -paneeli"
+            }
+        }
+    },
+    "permissions": {
+        "ShipStation:access": "Avaa ShipStation-valikko",
+        "ShipStation:create": "Luo ShipStationiin liittyviä tietoja",
+        "ShipStation:read": "Näytä ShipStationiin liittyviä tietoja",
+        "ShipStation:update": "Päivitä ShipStationiin liittyviä tietoja",
+        "ShipStation:delete": "Poista ShipStationiin liittyviä tietoja"
+    },
+    "settings": {
+        "ShipStation": {
+            "ShipStationPassword": {
+                "title": "ShipStation-salasana",
+                "description": "Aseta ShipStation-salasana"
+            },
+            "ShipStationEnabled": {
+                "title": "ShipStation",
+                "description": "Ota käyttöön tai poista käytöstä ShipStation-asetus"
+            }
+        }
+    }
+}

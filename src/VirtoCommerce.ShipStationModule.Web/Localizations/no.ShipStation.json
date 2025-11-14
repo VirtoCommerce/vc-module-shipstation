@@ -1,0 +1,28 @@
+{
+    "ShipStation": {
+        "blades": {
+            "hello-world": {
+                "title": "Hei verden-blade"
+            }
+        }
+    },
+    "permissions": {
+        "ShipStation:access": "Åpne ShipStation-menyen",
+        "ShipStation:create": "Opprette ShipStation-relaterte data",
+        "ShipStation:read": "Vise ShipStation-relaterte data",
+        "ShipStation:update": "Oppdatere ShipStation-relaterte data",
+        "ShipStation:delete": "Slette ShipStation-relaterte data"
+    },
+    "settings": {
+        "ShipStation": {
+            "ShipStationPassword": {
+                "title": "ShipStation-passord",
+                "description": "Angi ShipStation-passord"
+            },
+            "ShipStationEnabled": {
+                "title": "ShipStation",
+                "description": "Aktivere/deaktivere ShipStation-innstilling"
+            }
+        }
+    }
+}
