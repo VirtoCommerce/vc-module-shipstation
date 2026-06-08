@@ -13,7 +13,7 @@
         <owner>VirtoCommerce</owner>
     </owners>
     <projectUrl>https://github.com/VirtoCommerce/vc-module-ShipStation</projectUrl>
-    <iconUrl>Modules/$(VirtoCommerce.ShipStation)/Content/logo.png</iconUrl>
+    <iconUrl>Modules/$(VirtoCommerce.ShipStation)/Content/logo.svg</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <releaseNotes>First version.</releaseNotes>
     <copyright>Copyright © 2024-2026 VirtoCommerce. All rights reserved</copyright>
